@@ -1,8 +1,8 @@
 {
-  "name": "@martian/js",
-  "version": "0.0.6",
-  "description": "Martian.js loading utility",
-  "repository": "github:martian-pay/martian-pay-js",
+  "name": "@martianpay/js",
+  "version": "0.0.2",
+  "description": "MartianPay.js loading utility",
+  "repository": "github:MartianPay/martian-pay-js",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "jsnext:main": "dist/index.mjs",
@@ -25,13 +25,13 @@
     "prettier-check": "prettier './**/*.{js,ts,md,html,css}' --check"
   },
   "keywords": [
-    "Martian",
-    "Martian.js",
+    "MartianPay",
+    "MartianPay.js",
     "Elements"
   ],
-  "author": "Martian (https://www.martian-pay.com)",
+  "author": "Martian (https://www.martianpay.com)",
   "license": "MIT",
-  "homepage": "https://martian-pay.com/docs/js",
+  "homepage": "https://martianpay.com/docs/js",
   "files": [
     "dist",
     "lib",
