@@ -138,16 +138,16 @@ if ! grep -q 'working tree clean' <<< "$GIT_STATUS"; then
 fi
 
 echo "Installing dependencies according to lockfile"
-yarn install --frozen-lockfile
+pnpm install --frozen-lockfile
 
 echo "Running tests"
-yarn run test
+pnpm run test
 
 echo "Bumping package.json $RELEASE_TYPE version and tagging commit"
-yarn version --$RELEASE_TYPE
+pnpm version --$RELEASE_TYPE
 
 echo "Building"
-yarn run build
+pnpm run build
 
 verify_commit_is_signed
 
@@ -159,7 +159,7 @@ git push --follow-tags
 create_github_release
 
 echo "Publishing release"
-yarn --ignore-scripts publish --non-interactive --access=public
+pnpm --ignore-scripts publish --non-interactive --access=public
 
 echo "Publish successful!"
 echo ""

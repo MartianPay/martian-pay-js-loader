@@ -16,5 +16,5 @@ RSYNC			= rsync -avzh --progress --no-owner --no-group --checksum --exclude-from
 RSYNC_OPTS		= -e "ssh -i ~/.ssh/gh"
 
 deploy-test:
-	$(RSYNC) $(RSYNC_OPTS) ./ root@100.116.193.52:/data2/martain/fe/loader
-	ssh root@100.116.193.52 -i ~/.ssh/gh 'cd /data2/martain/fe/loader && yarn install && yarn build:test && yarn unlink && yarn link'
+	$(RSYNC) $(RSYNC_OPTS) ./ root@100.116.193.52:/data2/martian/pay/js-loader
+	ssh root@100.116.193.52 -i ~/.ssh/gh 'cd /data2/martian/pay/js-loader && pnpm install && pnpm build:test && pnpm unlink && pnpm link'

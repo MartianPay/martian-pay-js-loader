@@ -12,13 +12,15 @@ const PLUGINS = [
   }),
   babel({
     extensions: ['.ts', '.js', '.tsx', '.jsx'],
+    runtimeHelpers: true,
   }),
   replace({
+    preventAssignment: true,
     _VERSION: JSON.stringify(pkg.version),
   }),
   dotenv({
-    exclude: 'node_modules/**'
-  })
+    exclude: 'node_modules/**',
+  }),
 ];
 
 export default [
@@ -29,5 +31,6 @@ export default [
       {file: 'dist/index.mjs', format: 'es'},
     ],
     plugins: PLUGINS,
+    external: [/@babel\/runtime/],
   },
 ];

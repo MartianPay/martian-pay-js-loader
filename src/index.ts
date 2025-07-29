@@ -94,7 +94,7 @@ const onLoad = (
   }
 };
 
-const loadScript = (
+const loadScript = async (
   params: null | LoadMartianParams
 ): Promise<MartianConstructor | null> => {
   // Ensure that we only attempt to load Martian.js at most once
@@ -144,7 +144,6 @@ const loadScript = (
       onLoadListener = onLoad(resolve, reject);
       onErrorListener = onError(reject);
       script.addEventListener('load', onLoadListener);
-
       script.addEventListener('error', onErrorListener);
     } catch (error) {
       reject(error);
@@ -182,7 +181,7 @@ Promise.resolve()
     }
   });
 
-export const loadMartian: LoadMartian = (...args) => {
+export const loadMartian: LoadMartian = async (...args) => {
   loadCalled = true;
   const startTime = Date.now();
 

@@ -28,17 +28,17 @@ video][code-review] on "code review culture."
 Install dependencies:
 
 ```sh
-yarn install
+pnpm install
 ```
 
 We use a number of automated checks:
 
 - Jest, for testing
-  - `yarn test`
+  - `pnpm test`
 - ESLint, for assorted warnings
-  - `yarn run lint`
+  - `pnpm run lint`
 - Prettier, for code formatting
-  - `yarn run prettier`
+  - `pnpm run prettier`
 
 You might want to configure your editor to automatically run these checks. Not
 passing any of these checks will cause the CI build to fail.

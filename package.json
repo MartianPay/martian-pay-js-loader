@@ -9,16 +9,16 @@
   "types": "dist/index.d.ts",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "test": "yarn lint && yarn test:unit && yarn test:package-types && yarn test:types && yarn typecheck",
+    "test": "pnpm lint && pnpm test:unit && pnpm test:package-types && pnpm test:types && pnpm typecheck",
     "test:unit": "jest",
     "test:package-types": "attw --pack . --entrypoints ./lib ./pure",
     "test:types": "zx ./tests/types/scripts/test.mjs",
-    "lint": "eslint '{src,types}/**/*.{ts,js}' && yarn prettier-check",
+    "lint": "eslint '{src,types}/**/*.{ts,js}' && pnpm prettier-check",
     "typecheck": "tsc",
     "copy-types": "./scripts/copy-types",
-    "build": "yarn clean && yarn rollup -c && yarn copy-types",
-    "build:test": "NODE_ENV=test yarn build",
-    "build:prod": "NODE_ENV=production yarn build",
+    "build": "pnpm clean && pnpm rollup -c && pnpm copy-types",
+    "build:test": "NODE_ENV=test pnpm build",
+    "build:prod": "NODE_ENV=production pnpm build",
     "clean": "rimraf dist",
     "prepublishOnly": "echo \"\nPlease use ./scripts/publish instead\n\" && exit 1",
     "prettier": "prettier './**/*.{js,ts,md,html,css}' --write",
@@ -45,8 +45,10 @@
     "@arethetypeswrong/cli": "^0.15.3",
     "@babel/core": "^7.7.2",
     "@babel/preset-env": "^7.7.1",
+    "@babel/runtime": "^7.27.6",
     "@rollup/plugin-replace": "^2.3.1",
     "@types/jest": "^24.0.25",
+    "@types/node": "^24.0.15",
     "@typescript-eslint/eslint-plugin": "^4.15.2",
     "@typescript-eslint/parser": "^4.15.2",
     "babel-eslint": "^10.0.3",
@@ -68,6 +70,7 @@
     "zx": "^4.2.0"
   },
   "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.28.0",
     "rollup-plugin-dotenv": "^0.5.1"
   }
 }
