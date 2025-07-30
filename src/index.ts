@@ -7,7 +7,8 @@ import {
 
 declare const _VERSION: string;
 
-const SCRIPT_URL = process.env.MARTIAN_PAY_JS_URL || 'https://dev.martianpay.com/js/app.js';
+const SCRIPT_URL =
+  process.env.MARTIAN_PAY_JS_URL || 'https://js.martianpay.com/app.js';
 const SCRIPT_URL_REGEX = new RegExp(SCRIPT_URL);
 const EXISTING_SCRIPT_MESSAGE =
   'loadMartian.setLoadParameters was called but an existing Martian.js script already exists in the document; existing script parameters will be used';

@@ -61,7 +61,7 @@ create_github_release_fallback() {
   cat << EOF
 Remember to create a release on GitHub with a changelog notes:
 
-    https://github.com/stripe/stripe-js/releases/new
+    https://github.com/martianpay/martianpay-js/releases/new
 
 EOF
 }
@@ -140,14 +140,14 @@ fi
 echo "Installing dependencies according to lockfile"
 pnpm install --frozen-lockfile
 
-echo "Running tests"
+echo "Running tests"`
 pnpm run test
 
 echo "Bumping package.json $RELEASE_TYPE version and tagging commit"
 pnpm version --$RELEASE_TYPE
 
 echo "Building"
-pnpm run build
+pnpm run build:prod
 
 verify_commit_is_signed
 

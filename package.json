@@ -1,6 +1,6 @@
 {
   "name": "@martianpay/js",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "MartianPay.js loading utility",
   "repository": "github:MartianPay/martian-pay-js",
   "main": "dist/index.js",
