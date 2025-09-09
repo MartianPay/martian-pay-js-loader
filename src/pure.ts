@@ -15,13 +15,14 @@ const EXISTING_SCRIPT_MESSAGE =
 
 let martianPromise: Promise<MartianConstructor | null> | null = null;
 let loadCalled = false;
+let loadParameters: LoadMartianParams | null = null;
 
 const getMartianPromise: () => Promise<MartianConstructor | null> = () => {
   if (martianPromise) {
     return martianPromise;
   }
 
-  const p = loadScript(null);
+  const p = loadScript(loadParameters);
   martianPromise = p.catch((error) => {
     // clear cache on error
     martianPromise = null;
@@ -174,16 +175,6 @@ const initMartian = (
   return martian;
 };
 
-// Execute our own script injection after a tick to give users time to do their
-// own script injection.
-Promise.resolve()
-  .then(() => getMartianPromise())
-  .catch((error) => {
-    if (!loadCalled) {
-      console.warn(error);
-    }
-  });
-
 export const loadMartian: LoadMartian = async (...args) => {
   loadCalled = true;
   const startTime = Date.now();
@@ -192,3 +183,18 @@ export const loadMartian: LoadMartian = async (...args) => {
     initMartian(maybeMartian, args, startTime)
   );
 };
+
+// Add setLoadParameters function for pure module
+export const setLoadParameters = (params: LoadMartianParams): void => {
+  if (loadCalled) {
+    console.warn(
+      'loadMartian.setLoadParameters was called after loadMartian was called. This has no effect.'
+    );
+    return;
+  }
+
+  loadParameters = params;
+};
+
+// Attach setLoadParameters to loadMartian for convenience
+(loadMartian as any).setLoadParameters = setLoadParameters;

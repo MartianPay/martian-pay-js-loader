@@ -140,7 +140,7 @@ fi
 echo "Installing dependencies according to lockfile"
 pnpm install --frozen-lockfile
 
-echo "Running tests"`
+echo "Running tests"
 pnpm run test
 
 echo "Bumping package.json $RELEASE_TYPE version and tagging commit"
@@ -159,7 +159,7 @@ git push --follow-tags
 create_github_release
 
 echo "Publishing release"
-pnpm --ignore-scripts publish --non-interactive --access=public
+pnpm publish --access=public
 
 echo "Publish successful!"
 echo ""

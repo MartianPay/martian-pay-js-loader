@@ -75,6 +75,8 @@ export interface MartianPaymentTransaction {
   wallet_address: string;
 }
 
+export const setLoadParameters: (params: LoadMartianParams) => void;
+
 declare global {
   interface Window {
     martian?: MartianConstructor;

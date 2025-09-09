@@ -6,11 +6,12 @@ var SCRIPT_URL_REGEX = new RegExp(SCRIPT_URL);
 var EXISTING_SCRIPT_MESSAGE = 'loadMartian.setLoadParameters was called but an existing Martian.js script already exists in the document; existing script parameters will be used';
 var martianPromise = null;
 var loadCalled = false;
+var loadParameters = null;
 var getMartianPromise = function getMartianPromise() {
   if (martianPromise) {
     return martianPromise;
   }
-  var p = loadScript(null);
+  var p = loadScript(loadParameters);
   martianPromise = p.catch(function (error) {
     // clear cache on error
     martianPromise = null;
@@ -139,15 +140,6 @@ var initMartian = function initMartian(maybeMartian, args, startTime) {
   registerWrapper(martian, startTime);
   return martian;
 };
-// Execute our own script injection after a tick to give users time to do their
-// own script injection.
-Promise.resolve().then(function () {
-  return getMartianPromise();
-}).catch(function (error) {
-  if (!loadCalled) {
-    console.warn(error);
-  }
-});
 var loadMartian = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime.mark(function _callee2() {
     var _len,
@@ -176,5 +168,15 @@ var loadMartian = /*#__PURE__*/function () {
     return _ref2.apply(this, arguments);
   };
 }();
+// Add setLoadParameters function for pure module
+var setLoadParameters = function setLoadParameters(params) {
+  if (loadCalled) {
+    console.warn('loadMartian.setLoadParameters was called after loadMartian was called. This has no effect.');
+    return;
+  }
+  loadParameters = params;
+};
+// Attach setLoadParameters to loadMartian for convenience
+loadMartian.setLoadParameters = setLoadParameters;
 
-export { loadMartian };
+export { loadMartian, setLoadParameters };

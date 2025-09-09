@@ -1,6 +1,6 @@
 export type LoadMartian = (
   ...args: Parameters<MartianConstructor>
-) => Promise<Martian | null>
+) => Promise<Martian | null>;
 
 export interface LoadMartianParams {
   advancedFraudSignals: boolean;
@@ -11,15 +11,15 @@ export const loadMartian: (
   options?: MartianConstructorOptions | undefined
 ) => Promise<Martian | null>;
 export interface Martian {
-  retrievePaymentIntent(client_secret: string): Promise<MartainPaymentIntent>;
+  retrievePaymentIntent(client_secret: string): Promise<MartianPaymentIntent>;
   elements(): MartianElements;
   confirmPayment(options: {
     element: MartianPaymentElement;
-  }): Promise<MartainPaymentIntentResult>;
+  }): Promise<MartianPaymentIntentResult>;
 }
 
-export type MartainPaymentIntentResult =
-  | {paymentIntent: MartainPaymentIntent; error?: undefined}
+export type MartianPaymentIntentResult =
+  | {paymentIntent: MartianPaymentIntent; error?: undefined}
   | {paymentIntent?: undefined; error: Error};
 
 export interface MartianElements {
@@ -38,7 +38,7 @@ export interface MartianConstructor {
 
 export interface MartianConstructorOptions {}
 
-export interface MartainPaymentIntent {
+export interface MartianPaymentIntent {
   id?: string;
   object: 'payment_intent';
   amount: number;

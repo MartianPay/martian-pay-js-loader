@@ -5,11 +5,24 @@ module.exports = {
     '**/?(*.)+(spec|test).+(ts|tsx|js)',
   ],
   transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest',
+    '^.+\\.(ts|tsx)$': [
+      'ts-jest',
+      {
+        tsconfig: {
+          target: 'ES2020',
+          lib: ['ES2020', 'DOM', 'DOM.Iterable'],
+          module: 'ESNext',
+          moduleResolution: 'node',
+          esModuleInterop: true,
+          allowSyntheticDefaultImports: true,
+          skipLibCheck: true,
+          strict: true,
+        },
+      },
+    ],
   },
+  testEnvironment: 'jsdom',
   globals: {
-    // Suppress noise about enabling `esModuleInterop`
-    'ts-jest': {diagnostics: {ignoreCodes: [151001]}},
-    _VERSION: true,
+    _VERSION: '1.0.0',
   },
 };
